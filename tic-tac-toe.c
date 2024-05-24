@@ -128,11 +128,7 @@ int isWinningMove(char board[SIZE][SIZE], char player) {
     return 0;
 }
 
-/* 
- * @brief: Checks if the Tic-Tac-Toe board is full, indicating a draw.
- * --------------------------
- * @details: Checks if there are any empty
-/* 
+/*
  * @brief: Checks if the Tic-Tac-Toe board is full, indicating a draw.
  * --------------------------
  * @details: Checks if there are any empty spaces left on the board. If all cells are filled with 'X' or 'O',
