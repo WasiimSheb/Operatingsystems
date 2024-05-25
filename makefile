@@ -1,18 +1,42 @@
+# Compiler
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-SRC = main.c tic-tac-toe.c
-OBJ = $(SRC:.c=.o)
-EXECUTABLE = tic-tac-toe
 
-.PHONY: all clean
+# Compiler flags
+CFLAGS = -Wall -g
 
-all: $(EXECUTABLE)
+# Executables
+MYNC = mync
+TTT = ttt
 
-$(EXECUTABLE): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(EXECUTABLE)
+# Source files for each executable
+MYNC_SRC = mync.c
+TTT_SRC = ttt.c main.c
 
-%.o: %.c
+# Object files for each executable
+MYNC_OBJ = $(MYNC_SRC:.c=.o)
+TTT_OBJ = $(TTT_SRC:.c=.o)
+
+# Default target
+all: mync ttt
+
+# Rule to build mync
+mync: $(MYNC_OBJ)
+	$(CC) $(CFLAGS) -o $(MYNC) $(MYNC_OBJ)
+
+# Rule to build ttt5
+ttt: $(TTT_OBJ)
+	$(CC) $(CFLAGS) -o $(TTT) $(TTT_OBJ)
+
+# Rule to compile mync source files
+$(MYNC_OBJ): %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Rule to compile ttt source files
+$(TTT_OBJ): %.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean up the build
 clean:
-	rm -f $(OBJ) $(EXECUTABLE)
+	rm -f $(MYNC) $(TTT) $(MYNC_OBJ) $(TTT_OBJ)
+
+.PHONY: all clean mync ttt
